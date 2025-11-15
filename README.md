@@ -10,48 +10,48 @@ Whether the task is performing large-scale low-rank approximations, exploring te
 # Project framework
 ```
 decomlib/
-├── CMakeLists.txt # Top-level build script: configures build options, selects back-ends, sets up compilation of Fortran modules and creation of library.
-├── README.md # Project overview: library purpose, features, supported algorithms/hardware, getting started instructions.
-├── LICENSE # License file (e.g., MIT/BSD): legal terms for users and contributors.
-├── version.txt # Simple version file (e.g., "0.1.0"): tracks current release version of the library.
+├── CMakeLists.txt                      # Top-level build script: configures build options, selects back-ends, sets up compilation of Fortran modules and creation of library.
+├── README.md                           # Project overview: library purpose, features, supported algorithms/hardware, getting started instructions.
+├── LICENSE                            # License file (e.g., MIT/BSD): legal terms for users and contributors.
+├── version.txt                         # Simple version file (e.g., "0.1.0"): tracks current release version of the library.
 ├── src/
-│ ├── api/
-│ │ └── backend_api.f90 # Fortran module: defines the abstract interface for hardware back-end implementations (CPU, GPU, etc.).
-│ ├── backend/
-│ │ ├── cpu_mod.f90 # Fortran module: the CPU back-end implementation (multi-core/BLAS/LAPACK path).
-│ │ ├── nvidia_mod.f90 # Fortran module: NVIDIA GPU back-end implementation (CUDA/Fortran or via offload).
-│ │ ├── amd_mod.f90 # Fortran module: AMD GPU back-end implementation (ROCm/HIP/Fortran).
-│ │ └── intel_mod.f90 # Fortran module: Intel GPU back-end implementation (oneAPI/DPC++/Fortran offload).
-│ ├── matrix/
-│ │ ├── matrix_types.f90 # Fortran module: definitions of matrix/tensor types (dense, sparse, implicit) and common data structures.
-│ │ ├── sparse_support.f90 # Fortran module: support routines for sparse matrix formats and operations (CSR/CSC).
-│ │ └── implicit_matrix.f90 # Fortran module: interface for "implicit" matrix forms (user-provided A×x routines) and wrappers.
-│ ├── algorithms/
-│ │ ├── svd/
-│ │ │ ├── randomized.f90 # Fortran module: implementation of randomized SVD algorithm (low-rank sketching path).
-│ │ ├── │ krylov.f90 # Fortran module: implementation of Krylov / block-Lanczos / subspace-iteration SVD path.
-│ │ │ ├── hybrid_structured.f90 # Fortran module: hybrid and structure-exploiting SVD path (e.g., kernel, Hankel).
-│ │ │ └── full_svd.f90 # Fortran module: fallback path computing all singular values/vectors (dense SVD via LAPACK/solver).
-│ │ └── (future_algorithms/) # Directory placeholder for future algorithms (e.g., NMF, tensor decompositions).
-│ ├── utils/
-│ │ ├── memory_helpers.f90 # Fortran module: memory allocation, host-to-device transfers, pinned memory, alignment helpers.
-│ │ └── logging.f90 # Fortran module: logging, performance timers, iteration counts, residual monitors.
-│ └── c_bindings/
-│ └── c_interface.f90 # Fortran module with ISO_C_BINDING: exposes C-callable wrappers for Python (and other) bindings.
+│   ├── api/
+│   │   └── backend_api.f90             # Fortran module: defines the abstract interface for hardware back-end implementations (CPU, GPU, etc.).
+│   ├── backend/
+│   │   ├── cpu_mod.f90                 # Fortran module: the CPU back-end implementation (multi-core/BLAS/LAPACK path).
+│   │   ├── nvidia_mod.f90              # Fortran module: NVIDIA GPU back-end implementation (CUDA/Fortran or via offload) .
+│   │   ├── amd_mod.f90                 # Fortran module: AMD GPU back-end implementation (ROCm/HIP/Fortran) .
+│   │   └── intel_mod.f90               # Fortran module: Intel GPU back-end implementation (oneAPI/DPC++/Fortran offload) .
+│   ├── matrix/
+│   │   ├── matrix_types.f90            # Fortran module: definitions of matrix/tensor types (dense, sparse, implicit) and common data structures.
+│   │   ├── sparse_support.f90           # Fortran module: support routines for sparse matrix formats and operations (CSR/CSC).
+│   │   └── implicit_matrix.f90          # Fortran module: interface for "implicit" matrix forms (user-provided A×x routines) and wrappers.
+│   ├── algorithms/
+│   │   ├── svd/
+│   │   │   ├── randomized.f90          # Fortran module: implementation of randomized SVD algorithm (low-rank sketching path) .
+│   │   │   ├── krylov.f90               # Fortran module: implementation of Krylov / block-Lanczos / subspace-iteration SVD path .
+│   │   │   ├── hybrid_structured.f90    # Fortran module: hybrid and structure-exploiting SVD path (e.g., kernel, Hankel) .
+│   │   │   └── full_svd.f90             # Fortran module: fallback path computing all singular values/vectors (dense SVD via LAPACK/solver) .
+│   │   └── (future_algorithms/)         # Directory placeholder for future algorithms (e.g., NMF, tensor decompositions) .
+│   ├── utils/
+│   │   ├── memory_helpers.f90           # Fortran module: memory allocation, host-to-device transfers, pinned memory, alignment helpers.
+│   │   └── logging.f90                  # Fortran module: logging, performance timers, iteration counts, residual monitors.
+│   └── c_bindings/
+│       └── c_interface.f90              # Fortran module with ISO_C_BINDING: exposes C-callable wrappers for Python (and other) bindings.
 └── python/
-├── setup.py # Python packaging/install script: defines metadata, builds/links library, installs Python module.
-└── decomlib/
-├── init.py # Python package init: defines __version__, imports core interfaces.
-├── core.py # Python module: general interface (setting back-end, logging level, meta info).
-├── backend_selector.py # Python module: logic for selecting hardware back-end, checking availability, runtime dispatch.
-├── matrix.py # Python module: wrappers for matrix/tensor types (DenseMatrix, SparseMatrix, ImplicitMatrix) for user convenience.
-├── svd/
-│ ├── init.py # Python sub-package init for SVD algorithms.
-│ └── compute.py # Python module: high-level user API compute_svd(...), accepts matrices, parameters, returns U, S, Vt.
-└── tensor/
-├── init.py # Python sub-package init for tensor decomposition algorithms.
-├── cp.py # Python module: placeholder for CP decomposition API (future).
-└── tucker.py # Python module: placeholder for Tucker decomposition API (future).
+    ├── setup.py                         # Python packaging/install script: defines metadata, builds/links library, installs Python module.
+    └── decomlib/
+        ├── __init__.py                  # Python package init: defines `__version__`, imports core interfaces.
+        ├── core.py                      # Python module: general interface (setting back-end, logging level, meta info).
+        ├── backend_selector.py            # Python module: logic for selecting hardware back-end, checking availability, runtime dispatch.
+        ├── matrix.py                      # Python module: wrappers for matrix/tensor types (DenseMatrix, SparseMatrix, ImplicitMatrix) for user convenience.
+        ├── svd/
+        │   ├── __init__.py               # Python sub-package init for SVD algorithms.
+        │   └── compute.py                  # Python module: high-level user API `compute_svd(...)`, accepts matrices, parameters, returns U, S, Vt.
+        └── tensor/
+            ├── __init__.py                # Python sub-package init for tensor decomposition algorithms.
+            ├── cp.py                      # Python module: placeholder for CP decomposition API (future).
+            └── tucker.py                  # Python module: placeholder for Tucker decomposition API (future).
 ```
 
 # Project framework
@@ -69,4 +69,3 @@ decomlib/
     - svd/compute.py: exposes compute_svd(A, k=..., algorithm='auto', hardware='auto', ...).
     - tensor/ sub-package reserved for future decompositions.
  - The CMakeLists.txt will include options like ENABLE_NVIDIA_GPU, ENABLE_AMD_GPU, ENABLE_INTEL_GPU, and conditionally compile modules accordingly.
- - version.txt is used to track the release version by letting core.py to read it and set __version__.

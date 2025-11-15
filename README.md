@@ -8,12 +8,12 @@ For performance and flexibility, decomlib uses a modern Fortran core for numeric
 Whether the task is performing large-scale low-rank approximations, exploring tensor network factorizations, or accelerating structured data decompositions on heterogeneous hardware, decomlib is crafted as a unified framework for the linear and multilinear algebra needs --- with simplicity in usage and depth in capability.
 
 # Project framework
-
+```
 decomlib/
 ├── CMakeLists.txt # Top-level build script: configures build options, selects back-ends, sets up compilation of Fortran modules and creation of library.
 ├── README.md # Project overview: library purpose, features, supported algorithms/hardware, getting started instructions.
 ├── LICENSE # License file (e.g., MIT/BSD): legal terms for users and contributors.
-├── version.txt # Simple version file (e.g., “0.1.0”): tracks current release version of the library.
+├── version.txt # Simple version file (e.g., "0.1.0"): tracks current release version of the library.
 ├── src/
 │ ├── api/
 │ │ └── backend_api.f90 # Fortran module: defines the abstract interface for hardware back-end implementations (CPU, GPU, etc.).
@@ -25,7 +25,7 @@ decomlib/
 │ ├── matrix/
 │ │ ├── matrix_types.f90 # Fortran module: definitions of matrix/tensor types (dense, sparse, implicit) and common data structures.
 │ │ ├── sparse_support.f90 # Fortran module: support routines for sparse matrix formats and operations (CSR/CSC).
-│ │ └── implicit_matrix.f90 # Fortran module: interface for “implicit” matrix forms (user-provided A×x routines) and wrappers.
+│ │ └── implicit_matrix.f90 # Fortran module: interface for "implicit" matrix forms (user-provided A×x routines) and wrappers.
 │ ├── algorithms/
 │ │ ├── svd/
 │ │ │ ├── randomized.f90 # Fortran module: implementation of randomized SVD algorithm (low-rank sketching path).
@@ -34,7 +34,7 @@ decomlib/
 │ │ │ └── full_svd.f90 # Fortran module: fallback path computing all singular values/vectors (dense SVD via LAPACK/solver).
 │ │ └── (future_algorithms/) # Directory placeholder for future algorithms (e.g., NMF, tensor decompositions).
 │ ├── utils/
-│ │ ├── memory_helpers.f90 # Fortran module: memory allocation, host↔device transfers, pinned memory, alignment helpers.
+│ │ ├── memory_helpers.f90 # Fortran module: memory allocation, host-to-device transfers, pinned memory, alignment helpers.
 │ │ └── logging.f90 # Fortran module: logging, performance timers, iteration counts, residual monitors.
 │ └── c_bindings/
 │ └── c_interface.f90 # Fortran module with ISO_C_BINDING: exposes C-callable wrappers for Python (and other) bindings.
@@ -52,7 +52,7 @@ decomlib/
 ├── init.py # Python sub-package init for tensor decomposition algorithms.
 ├── cp.py # Python module: placeholder for CP decomposition API (future).
 └── tucker.py # Python module: placeholder for Tucker decomposition API (future).
-
+```
 
 # Project framework
 

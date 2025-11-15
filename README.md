@@ -10,10 +10,10 @@ Whether the task is performing large-scale low-rank approximations, exploring te
 # Project framework
 ```
 decomlib/
-├── CMakeLists.txt                      # Top-level build script: configures build options, selects back-ends, sets up compilation of Fortran modules and creation of library.
-├── README.md                           # Project overview: library purpose, features, supported algorithms/hardware, getting started instructions.
-├── LICENSE                            # License file (e.g., MIT/BSD): legal terms for users and contributors.
-├── version.txt                         # Simple version file (e.g., "0.1.0"): tracks current release version of the library.
+├── CMakeLists.txt                      
+├── README.md                           
+├── LICENSE                            
+├── version.txt                         
 ├── src/
 │   ├── api/
 │   │   └── backend_api.f90             # Fortran module: defines the abstract interface for hardware back-end implementations (CPU, GPU, etc.).
@@ -68,4 +68,4 @@ decomlib/
     - matrix.py: classes exposing NumPy arrays, SciPy sparse, or user callback to Fortran library.
     - svd/compute.py: exposes compute_svd(A, k=..., algorithm='auto', hardware='auto', ...).
     - tensor/ sub-package reserved for future decompositions.
- - The CMakeLists.txt will include options like ENABLE_NVIDIA_GPU, ENABLE_AMD_GPU, ENABLE_INTEL_GPU, and conditionally compile modules accordingly.
+ - The CMakeLists.txt includes options like ENABLE_NVIDIA_GPU, ENABLE_AMD_GPU, ENABLE_INTEL_GPU, and conditionally compile modules accordingly.
